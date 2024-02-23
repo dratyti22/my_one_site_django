@@ -17,14 +17,14 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'deps/favicon/favicon-32x32.png' %}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'deps/favicon/favicon-16x16.png' %}" />
     <link rel="manifest" href="{% static 'deps/favicon/site.webmanifest' %}" />
-    <title>{{title}}</title>
+    <title>{{ title }}</title>
   </head>
 
   <body>
     <header>
       <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container">
-          <a class="navbar-brand" href="{% url "main:index" %}">Home</a>
+          <a class="navbar-brand" href="{% url 'main:index' %}">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -38,7 +38,7 @@
                     <a class="dropdown-item text-white" href="#">Контактная информация</a>
                   </li>
                   <li>
-                    <a class="dropdown-item text-white" href="{% url "main:about" %}">Про нас</a>
+                    <a class="dropdown-item text-white" href="{% url 'main:about' %}">Про нас</a>
                   </li>
                 </ul>
               </li>
@@ -58,7 +58,7 @@
                     <a class="dropdown-item text-white" href="users/profile.html">Личный кабинет</a>
                   </li>
                   <li>
-                    <a class="dropdown-item text-white" href="#">Админ панель</a>
+                    <a class="dropdown-item text-white" href="{% url 'admin:index' %}">Админ панель</a>
                   </li>
                   <li>
                     <hr class="dropdown-divider" />
@@ -88,27 +88,11 @@
               <img class="mx-1" src="{% static 'deps/icons/grid-fill.svg' %}" alt="Catalog Icon" width="16" height="16" />
             </button>
             <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Все товары</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Кухня</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Спальня</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Гостинная</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Офис</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Фурнитура</a>
-              </li>
-              <li>
-                <a class="dropdown-item text-white" href="{% url "catalog:index" %}">Декор</a>
-              </li>
+              {% for category in categories %}
+                <li>
+                  <a class="dropdown-item text-white" href="{% url 'catalog:index' %}">{{ category.name }}</a>
+                </li>
+              {% endfor %}
             </ul>
           </div>
           <!-- Значек корзины, вызывает модальное окно -->
@@ -182,12 +166,14 @@
           </div>
           <div class="col-lg-10">
             <!-- Контент на странице -->
-            {% block content %}{% endblock content %}
+            {% block content %}
+            {% endblock %}
           </div>
         </div>
       </div>
     </section>
-    {% block footer %}{% endblock footer %}
+    {% block footer %}
+    {% endblock %}
     <script src="{% static 'deps/js/jquery/jquery-3.7.0.min.js' %}"></script>
     <script src="{% static 'deps/js/jquery-events.js' %}"></script>
     <script src="{% static 'deps/js/jquery-ajax.js' %}"></script>
