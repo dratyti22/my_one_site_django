@@ -37,3 +37,16 @@ class UserRegisterForm(UserCreationForm):
     email = forms.CharField()
     password1 = forms.CharField()
     password2 = forms.CharField()
+
+
+class ProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ['image', 'username', 'last_name', 'first_name',
+                  'email']
+
+    image = forms.ImageField(required=False)
+    username = forms.CharField()
+    last_name = forms.CharField()
+    first_name = forms.CharField()
+    email = forms.CharField()
