@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="mt-5 pt-5"><strong>{{ content }}</strong></h1>
+{% for i in content %}
+<h1 class="mt-5 pt-5"><strong>{{ i.content }}</strong></h1>
+{% endfor %}
 {% endblock %}
 
 {% block footer %}
