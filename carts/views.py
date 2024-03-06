@@ -2,13 +2,14 @@ from django.shortcuts import render, redirect
 from goods.models import Products
 from .models import Cart
 
+
 def cart_add(request, product_slug):
     product = Products.objects.get(slug=product_slug)
 
     if request.user.is_authenticated:
         carts = Cart.objects.filter(user=request.user, product=product)
 
-        if carts.exists(): # проверка есть ли этот продукт в корзине
+        if carts.exists():  # проверка есть ли этот продукт в корзине
             cart = carts.first()
             if cart:
                 cart.quantity += 1
@@ -18,9 +19,13 @@ def cart_add(request, product_slug):
     return redirect(request.META['HTTP_REFERER'])
 
 
-
 def cart_change(request, product_slug):
     ...
 
-def cart_remove(request, product_slug):
-    ...
+
+def cart_remove(request, cart_id):
+
+    cart = Cart.objects.get(id=cart_id)
+    cart.delete()
+
+    return redirect(request.META['HTTP_REFERER'])
