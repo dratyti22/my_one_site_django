@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block model_cart %}
+{% include "includes/cart_button.html" %}
+{% endblock model_cart %}
+
 {% block content %}
 {% for i in content %}
 <div class="mt-5 pt-5 bg-white custom-shadow rounded">
