@@ -27,8 +27,9 @@ urlpatterns = [
     path("catalog/", include("goods.urls", namespace="catalog")),
     path("cart/", include("carts.urls", namespace="cart")),
     path("user/", include("users.urls", namespace="user")),
+    path("orders/", include("orders.urls", namespace="orders")),
 ]
 
 if settings.DEBUG:
-    urlpatterns += [    path("__debug__/", include("debug_toolbar.urls")),]
+    urlpatterns += [path("__debug__/", include("debug_toolbar.urls")),]
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
